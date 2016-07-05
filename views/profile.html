@@ -1,0 +1,21 @@
+<% include header.html %>
+
+<div class='container'>
+    Hello <%= user.fullname %>
+
+    <img src='<%= user.photo %>' >
+
+    <form action='/save-photo' 
+        method='post' enctype="multipart/form-data">
+        <input type='file' name='photo' 
+            class='btn btn-default'>
+        <button type='submit' 
+            class='btn btn-primary'>Upload</button>
+    </form>
+
+
+    <a href='/logout' class='btn btn-danger'>Log Out</a>
+
+</div>
+
+<% include footer.html %>

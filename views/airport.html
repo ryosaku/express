@@ -1,0 +1,42 @@
+<% include header.html %>
+
+<div class='container'>
+    <br>
+    <form action='javascript:search()'>
+        <div class='input-group'>
+            <input id='query' placeholder='Airport Name'
+                class='form-control' autofocus>
+            <span class='input-group-btn'>
+                <button type='submit' 
+                    class='btn btn-primary'>Search</button>
+            </span>
+        </div>
+    </form>
+
+    <table class='table' style='display:none'>
+        <thead>
+            <tr><th>Code</th><th>Name</th><th>Country</th></tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+function search() {
+    $('table').fadeOut()
+    $.get('/search?name=' + $('#query').val())
+    .done(show)
+}
+function show(data) {
+    $('tbody').html('')
+    for (var i = 0; i < data.length; i++) {
+        var row = '<tr><td>' + data[i].code + '</td><td>' +
+            data[i].name + '</td><td>' + data[i].country + '</td></tr>'
+        $('tbody').append(row)
+    }
+    $('table').fadeIn()
+}
+</script>
+
+<% include footer.html %>
